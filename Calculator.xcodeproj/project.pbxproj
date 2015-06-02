@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5443E9E71B1E082200BE653D /* CalculatorBrain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5443E9E61B1E082200BE653D /* CalculatorBrain.swift */; };
 		54E0AE781A7D4A1E00C17898 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0AE771A7D4A1E00C17898 /* AppDelegate.swift */; };
 		54E0AE7B1A7D4A1E00C17898 /* Calculator.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 54E0AE791A7D4A1E00C17898 /* Calculator.xcdatamodeld */; };
 		54E0AE7D1A7D4A1E00C17898 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54E0AE7C1A7D4A1E00C17898 /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5443E9E61B1E082200BE653D /* CalculatorBrain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculatorBrain.swift; sourceTree = "<group>"; };
 		54E0AE721A7D4A1E00C17898 /* Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Calculator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		54E0AE761A7D4A1E00C17898 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		54E0AE771A7D4A1E00C17898 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				54E0AE7C1A7D4A1E00C17898 /* ViewController.swift */,
+				5443E9E61B1E082200BE653D /* CalculatorBrain.swift */,
 				54E0AE7E1A7D4A1E00C17898 /* Main.storyboard */,
 				54E0AE751A7D4A1E00C17898 /* Supporting Files */,
 			);
@@ -217,6 +220,7 @@
 			files = (
 				54E0AE7D1A7D4A1E00C17898 /* ViewController.swift in Sources */,
 				54E0AE781A7D4A1E00C17898 /* AppDelegate.swift in Sources */,
+				5443E9E71B1E082200BE653D /* CalculatorBrain.swift in Sources */,
 				54E0AE7B1A7D4A1E00C17898 /* Calculator.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -413,6 +417,7 @@
 				54E0AE961A7D4A1F00C17898 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		54E0AE971A7D4A1F00C17898 /* Build configuration list for PBXNativeTarget "CalculatorTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				54E0AE991A7D4A1F00C17898 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
