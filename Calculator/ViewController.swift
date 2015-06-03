@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     // ? - Optional
     @IBOutlet weak var display: UILabel!;
     
+    @IBOutlet weak var history: UILabel!;
+    
     // All properties must be initialised. There are two ways of 
     // doing this: 
     // a) Using an initialiser 
@@ -38,6 +40,9 @@ class ViewController: UIViewController {
         set {
             display.text = "\(newValue)";
             self.userIsInTheMiddleOfTypingANumber = false;
+            if let stack = brain.unravelStack() {
+                history.text = stack;
+            }
         }
     }
 
@@ -48,12 +53,31 @@ class ViewController: UIViewController {
         // if the currentTitle is nil, everything goes boom.
         let digit = sender.currentTitle!;
         if userIsInTheMiddleOfTypingANumber {
+            if digit == "." {
+                if let displayedValue = display.text {
+                    if displayedValue.rangeOfString(".") != nil {
+                        println("Adding a decimal point when a decimal point already exists");
+                        return;
+                    }
+                }
+            }
             display.text = display.text! + digit;
         } else {
-            display.text = digit;
+            if digit == "." {
+                display.text = "0.";
+            } else {
+                display.text = digit;
+            }
             self.userIsInTheMiddleOfTypingANumber = true;
+            history.text = brain.unravelStack();
         }
         
+    }
+    
+    @IBAction func clear(sender: UIButton) {
+        brain.empty();
+        displayValue = 0;
+        history.text = "0.0";
     }
     
     @IBAction func enter() {

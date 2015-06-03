@@ -14,6 +14,7 @@ class CalculatorBrain {
         case UnaryOperation(String, Double -> Double)
         case BinaryOperation(String, (Double, Double) -> Double)
         case Operand(Double)
+        case ZilchOperation(String, () -> Double)
         
         var description: String {
             get {
@@ -24,6 +25,8 @@ class CalculatorBrain {
                     return symbol;
                 case .Operand(let operand):
                     return "\(operand)";
+                case .ZilchOperation(let symbol, _):
+                    return symbol;
                 }
             }
         }
@@ -43,11 +46,18 @@ class CalculatorBrain {
         learnOp(Op.BinaryOperation("+") { $0 + $1 });
         learnOp(Op.BinaryOperation("−") { $1 - $0 });
         learnOp(Op.UnaryOperation("√", sqrt));
+        learnOp(Op.UnaryOperation("sin", sin));
+        learnOp(Op.UnaryOperation("cos", cos));
+        learnOp(Op.ZilchOperation("π", { M_PI }))
     }
     
     func pushOperand(operand: Double) -> Double? {
         opStack.append(Op.Operand(operand));
         return evaluate();
+    }
+    
+    func empty() {
+        self.opStack.removeAll(keepCapacity: true); 
     }
     
     func performOperation(symbol: String) -> Double? {
@@ -75,6 +85,8 @@ class CalculatorBrain {
                 if let operand = operandEvaluation.result {
                     return (operation(operand), operandEvaluation.remainingOps);
                 }
+            case .ZilchOperation(_, let operation):
+                return (operation(), remainingOps);
             case .BinaryOperation(_, let operation):
                 let op1Evaluation = evaluate(remainingOps);
                 if let operand1 = op1Evaluation.result {
@@ -87,6 +99,10 @@ class CalculatorBrain {
             
         }
         return (nil, ops);
+    }
+    
+    func unravelStack() -> String? {
+        return " ".join(opStack.map({ "\($0)" }));
     }
     
 }
