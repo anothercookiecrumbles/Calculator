@@ -48,7 +48,7 @@ class CalculatorBrain {
         learnOp(Op.UnaryOperation("√", sqrt));
         learnOp(Op.UnaryOperation("sin", sin));
         learnOp(Op.UnaryOperation("cos", cos));
-        learnOp(Op.ZilchOperation("π", { M_PI }))
+        learnOp(Op.ZilchOperation("π", { M_PI }));
     }
     
     func pushOperand(operand: Double) -> Double? {

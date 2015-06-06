@@ -33,12 +33,25 @@ class ViewController: UIViewController {
     
     var brain = CalculatorBrain();
     
-    var displayValue: Double {
+    let numberFormatter = NSNumberFormatter();
+    
+    var displayValue: Double? {
         get {
-            return NSNumberFormatter().numberFromString(display.text!)!.doubleValue;
+            if let displayText = display.text {
+                if let displayNumber = numberFormatter.numberFromString(displayText) {
+                    return displayNumber.doubleValue;
+                }
+            }
+            return nil
         }
         set {
-            display.text = "\(newValue)";
+            if (newValue != nil) {
+                numberFormatter.numberStyle = .DecimalStyle;
+                numberFormatter.maximumFractionDigits = 4;
+                display.text! = numberFormatter.stringFromNumber(newValue!)!;
+            } else {
+                display.text! = "0";
+            }
             self.userIsInTheMiddleOfTypingANumber = false;
             if let stack = brain.unravelStack() {
                 history.text = stack;
@@ -80,9 +93,21 @@ class ViewController: UIViewController {
         history.text = "0.0";
     }
     
+    @IBAction func backspace(sender: UIButton) {
+        if userIsInTheMiddleOfTypingANumber {
+            if let displayedValue = display.text {
+                if count(displayedValue) > 0 {
+                    display.text = dropLast(display.text!);
+                }
+            }
+        } else {
+            display.text = "0.0";
+        }
+    }
+    
     @IBAction func enter() {
         self.userIsInTheMiddleOfTypingANumber = false;
-        if let result = brain.pushOperand(displayValue) {
+        if let result = brain.pushOperand(displayValue!) {
             displayValue = result;
         } else {
             displayValue = 0;
@@ -92,11 +117,23 @@ class ViewController: UIViewController {
     @IBAction func operate(sender: UIButton) {
         let operation = sender.currentTitle!;
         if userIsInTheMiddleOfTypingANumber {
+            if operation == "±" {
+                if let displayText = display.text {
+                    if displayText[displayText.startIndex] == "-"  {
+                        display.text = dropFirst(displayText)
+                    } else {
+                        display.text = "-" + displayText
+                    }
+                return
+                }
+            }
+
             enter();
         }
         if let operation = sender.currentTitle {
             if let result = brain.performOperation(operation) {
                 displayValue = result;
+                history.text = history.text! + " = ";
             } else {
                 displayValue = 0;
             }
