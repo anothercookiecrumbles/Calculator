@@ -120,9 +120,9 @@ class ViewController: UIViewController {
             if operation == "±" {
                 if let displayText = display.text {
                     if displayText[displayText.startIndex] == "-"  {
-                        display.text = dropFirst(displayText)
+                        display.text = dropFirst(displayText);
                     } else {
-                        display.text = "-" + displayText
+                        display.text = "-" + displayText;
                     }
                 return
                 }
